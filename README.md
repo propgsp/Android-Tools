@@ -34,7 +34,7 @@ As a beginner in **Android ROM development and customization**, I have collected
 
 ---
 
-## 🛠️ Important Advice  
+##  Important Advice  
    **Strictly use Linux** – It's essential for ROM development.  
    **Avoid WSL** – Too many limitations for this process.  
    **Bare-metal Linux is best** – If you can't install Linux natively, use a **Linux VM**.  
@@ -44,7 +44,7 @@ As a beginner in **Android ROM development and customization**, I have collected
 
 ---
 
-## 🛠️ Usage Overview  
+##  Usage Overview  
   Each tool contains a **README.md** inside its respective folder with **detailed usage instructions**.  
   Below is a **quick overview** for advanced users who prefer a **fast reference**.
 
@@ -109,7 +109,7 @@ sudo apt update && sudo apt install -y binwalk simg2img lz4 squashfs-tools mount
 ```bash
 pip install protobuf
 ```
-🔹 Some extraction tools may require Python dependencies like `protobuf`.
+ Some extraction tools may require Python dependencies like `protobuf`.
 
 ---
 
