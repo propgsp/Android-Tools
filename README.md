@@ -1,24 +1,16 @@
 <p align="center">
   <img src="https://img.shields.io/github/stars/PROPGSP/Android-Tools?color=FFD700&label=Stars" alt="GitHub stars">
-  
+  <img src="https://img.shields.io/github/forks/PROPGSP/Android-Tools?color=00BFFF&label=Forks" alt="GitHub forks">
 </p>
-
-
-
-
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=30&duration=2000&pause=500&color=0088FF&center=true&vCenter=true&width=600&lines=Android+Tools;Firmware+Extraction;Firmware+Dumping;ROM+Customization;Kernel+Tweaks">
-</p>
-
 
 
 # Android  Tools
 
 
 
-**A collection of powerful tools designed to kickstart Android ROM development and customization.**  
+**A collection of powerful tools designed to kickstart your Android ROM development and customization.**  
 
-** Beginner-friendly** – As an beginner in Android ROM development and customization, I've gathered tools along my journey to make them easily accessible for beginners.
+As a beginner in Android ROM development and customization, I've gathered tools along my journey to make them easily accessible for beginners.
 
  **Get the Files from Releases:**  
 [🔗 Android Dev Tools Release](https://github.com/PROPGSP/Android-Tools/releases/tag/release)  
