@@ -15,7 +15,7 @@
 
 
 
-# Android  Tools  
+# Android  Tools
 
 
 
@@ -31,7 +31,7 @@
 As a beginner in **Android ROM development and customization**, I have collected some tools to that are required to extract the required blobs to build device tree from an ota update package.
 
 
-##  Important Advice  
+##  Important:  
    **Strictly use Linux** – It's essential for ROM development.  
    **Avoid WSL** – Too many limitations for this process.  
    **Bare-metal Linux is best** – If you can't install Linux natively, use a **Linux VM**.  
@@ -39,13 +39,15 @@ As a beginner in **Android ROM development and customization**, I have collected
    **Check out minimum system requirements:**  
   [🔗 Android Build Requirements](https://source.android.com/docs/setup/start/requirements)  
 
----
+
+
 
 ##  Usage Overview  
   Each tool contains a **README.md** inside its respective folder with **detailed usage instructions**.  
   Below is a **quick overview** for advanced users who prefer a **fast reference**.
 
----
+
+
 
 ## Extracting OTA Firmware (payload.bin)  
 If you have an **OTA update** containing `payload.bin`, use **payload-dumper-go** inside `payload.bin-unpackor`:
@@ -65,7 +67,8 @@ payload-dumper-go /path/to/payload.bin
    You now have unpacked images (`boot`, `dtbo`, `system`, `vendor`, etc.).  
 ⚠️ Not all payloads contain the same images – it depends on the device brand/model.
 
----
+
+
 
 ## Extracting Sparse Images (`super.img`)  
 If you **don't have payload.bin** but instead have **sparse chunks**, follow these steps:
@@ -87,7 +90,9 @@ mkdir super_unpacked; cd super_unpacked; touch vendor_b.img
 ```
 Now you have **all images extracted** from the firmware.
 
----
+
+
+
 
 ## Extracting Device Tree, Kernel, and Other Files  
 
@@ -95,7 +100,7 @@ When extracting **device tree blobs (DTB)**, **kernel files**, and **embedded pa
 
 **Note:** If you got the expected files from the firmware just skip the steps.
 
----
+
 
 ###   **Step 1: Install Required Libraries & Tools**  
 Before extracting, install essential tools:  
@@ -108,7 +113,7 @@ pip install protobuf
 ```
  Some extraction tools may require Python dependencies like `protobuf`.
 
----
+
 
 ###   **Step 2: Identify Image Format**  
 First, check the format of `.img` files:  
@@ -117,7 +122,7 @@ file *.img
 ```
   If **Erofs**, **SquashFS**, **Ext4**, or another format, use the relevant method below.
 
----
+
 
 ###   **Step 3: Extracting EROFS Files**  
 For **EROFS-formatted partitions**, use:  
@@ -133,7 +138,7 @@ sudo mount -t erofs system_a.img mount_point/
 ```
 Now browse the extracted files inside `mount_point/`.
 
----
+
 
 ###   **Step 4: Extracting Generic Files Using Binwalk**  
 If the image contains embedded files (such as kernel or DTB blobs), use **Binwalk** for deep extraction:  
@@ -150,7 +155,7 @@ binwalk -Me -r name.img
   **Additional Extraction with Binwalk:**  
 If Binwalk does not properly extract the data, use **`dd`** to manually carve out sections based on offsets as mentioned in Step 8.
 
----
+
 
 ###    **Step 5: Extracting Kernel & Device Tree (DTB)**  
 Some devices store **kernel and DTB files** inside `boot.img`, `vendor_boot.img`, or `dtbo.img`.  
@@ -179,7 +184,7 @@ dd if=boot.img of=dtb.img bs=1 skip=<offset>
 ```
 _(Replace `<offset>` with actual DTB location found using Binwalk.)_
 
----
+
 
 ###    **Step 6: Extracting Android Boot Image Components**  
 For extracting boot partitions (`boot.img`, `vendor_boot.img`, etc.), use **Android Boot Image Editor**:
@@ -197,7 +202,7 @@ chmod +x gradlew
    Extracted files appear in `image-unpack-repack/build/`.  
    **After extracting each `.img`, clear the build folder** to avoid conflicts.
 
----
+
 
 ###  **Step 7: Extracting Vendor Blobs**  
 For extracting vendor binary blobs:  
@@ -214,7 +219,7 @@ sudo mount -o loop vendor.raw.img vendor_mount/
 ```
    You can now browse vendor files inside `vendor_mount/`.
 
----
+
 
 ###    **Step 8: Manual Extraction Using `dd` (If Nothing Else Works)**  
 When **other methods fail**, manually extract files using `dd`.  
@@ -233,25 +238,25 @@ dd if=name.img of=extracted_file bs=1 skip=<offset> count=<size>
 
    This method **works when automated extractors fail**!
 
----
 
-##  **Final Notes**  
+
+## Note:  
  Always **check the image format first**.  
  Use the **appropriate extraction tool** (`Binwalk`, `simg2img`, `dd`, etc.).  
  If extraction **fails**, **try a combination of multiple methods**.  
  **Clear build folders** after unpacking to keep things organized.  
 
 
----
 
-## 📜 License  
+
+## License  
  This project is a **collection of open-source tools**.  
 Each tool contains its **own respective license file**.
 
 
----
 
-## 🏆 Credits  
+
+## Credits  
  **Thanks to the amazing developers** who created these essential tools!  
 
 |  **Tool** |  **Developer** |  **Repository** |
@@ -261,6 +266,8 @@ Each tool contains its **own respective license file**.
 | **Payload Dumper Go** | @ssut | [🔗 GitHub Repo](https://github.com/ssut/payload-dumper-go) |
 | **Android Boot Image Editor** | @cfig | [🔗 GitHub Repo](https://github.com/cfig/Android_boot_image_editor) |
 |**bootimg-tool**| @xblax |[🔗 GitHub Repo](https://github.com/xblax/bootimg-tools) |
+
+
 💙 **A huge shoutout to these developers for building such powerful tools that make ROM development easier for everyone!**  
 
 
