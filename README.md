@@ -1,7 +1,6 @@
 <p align="center">
   <img src="https://img.shields.io/github/stars/PROPGSP/Android-Tools?color=FFD700&label=Stars" alt="GitHub stars">
-  <img src="https://img.shields.io/github/forks/PROPGSP/Android-Tools?color=00BFFF&label=Forks" alt="GitHub forks">
-  <img src="https://img.shields.io/github/watchers/PROPGSP/Android-Tools?color=32CD32&label=Watchers" alt="GitHub watchers">
+  
 </p>
 
 
