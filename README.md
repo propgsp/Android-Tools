@@ -2,8 +2,6 @@
   <img src="https://img.shields.io/github/stars/PROPGSP/Android-Tools?color=FFD700&label=Stars" alt="GitHub stars">
   <img src="https://img.shields.io/github/forks/PROPGSP/Android-Tools?color=00BFFF&label=Forks" alt="GitHub forks">
   <img src="https://img.shields.io/github/watchers/PROPGSP/Android-Tools?color=32CD32&label=Watchers" alt="GitHub watchers">
-  <img src="https://img.shields.io/github/contributors/PROPGSP/Android-Tools?color=8A2BE2&label=Contributors" alt="GitHub contributors">
-  <img src="https://img.shields.io/github/license/PROPGSP/Android-Tools?color=DC143C&label=License" alt="GitHub license">
 </p>
 
 
