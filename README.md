@@ -15,15 +15,15 @@
 
 
 
-# 🔧 Android  Tools  
+# Android  Tools  
 
 
 
-🚀 **A collection of powerful tools designed to kickstart Android ROM development and customization.** 🚀  
+**A collection of powerful tools designed to kickstart Android ROM development and customization.**  
 
-**🔹 Beginner-friendly** – As an enthusatic beginner in Android ROM development and customization, I've gathered tools along my journey to make them easily accessible for beginners.
+** Beginner-friendly** – As an beginner in Android ROM development and customization, I've gathered tools along my journey to make them easily accessible for beginners.
 
-📁 **Get the Files from Releases:**  
+ **Get the Files from Releases:**  
 [🔗 Android Dev Tools Release](https://github.com/PROPGSP/Android-Tools/releases/tag/release)  
 
 
@@ -35,56 +35,56 @@ As a beginner in **Android ROM development and customization**, I have collected
 ---
 
 ## 🛠️ Important Advice  
-✔️ **Strictly use Linux** – It's essential for ROM development.  
-❌ **Avoid WSL** – Too many limitations for this process.  
-💻 **Bare-metal Linux is best** – If you can't install Linux natively, use a **Linux VM**.  
-🛠️ **Oracle VirtualBox is a better alternative** to WSL, but expect slower builds (several hours to days).  
-📌 **Check out minimum system requirements:**  
-[🔗 Android Build Requirements](https://source.android.com/docs/setup/start/requirements)  
+   **Strictly use Linux** – It's essential for ROM development.  
+   **Avoid WSL** – Too many limitations for this process.  
+   **Bare-metal Linux is best** – If you can't install Linux natively, use a **Linux VM**.  
+   **Oracle VirtualBox is a better alternative** to WSL, but expect slower builds (several hours to days).  
+   **Check out minimum system requirements:**  
+  [🔗 Android Build Requirements](https://source.android.com/docs/setup/start/requirements)  
 
 ---
 
 ## 🛠️ Usage Overview  
-Each tool contains a **README.md** inside its respective folder with **detailed usage instructions**.  
-Below is a **quick overview** for advanced users who prefer a **fast reference**.
+  Each tool contains a **README.md** inside its respective folder with **detailed usage instructions**.  
+  Below is a **quick overview** for advanced users who prefer a **fast reference**.
 
 ---
 
-## 📦 Extracting OTA Firmware (payload.bin)  
+## Extracting OTA Firmware (payload.bin)  
 If you have an **OTA update** containing `payload.bin`, use **payload-dumper-go** inside `payload.bin-unpackor`:
 
-1️⃣ **Set execution permissions:**  
+1) **Set execution permissions:**  
 ```bash
 chmod +x payload-dumper-go 
 ```
-2️⃣ **Add the tool to your PATH:**  
+2️) **Add the tool to your PATH:**  
 ```bash
 export PATH=$PATH:/path/to/payload-dumper-go
 ```
-3️⃣ **Extract `payload.bin`:**  
+3️) **Extract `payload.bin`:**  
 ```bash
 payload-dumper-go /path/to/payload.bin
 ```
-🚀 You now have unpacked images (`boot`, `dtbo`, `system`, `vendor`, etc.).  
+   You now have unpacked images (`boot`, `dtbo`, `system`, `vendor`, etc.).  
 ⚠️ Not all payloads contain the same images – it depends on the device brand/model.
 
 ---
 
-## 📦 Extracting Sparse Images (`super.img`)  
+## Extracting Sparse Images (`super.img`)  
 If you **don't have payload.bin** but instead have **sparse chunks**, follow these steps:
 
-### 1️⃣ Convert Sparse Images to `super.img`  
+### 1️) Convert Sparse Images to `super.img`  
 Inside `super.img-extractor`, run:  
 ```bash
 ./simg2img system.img_sparsechunk.* super.img
 ```
 
-### 2️⃣ Unpack `super.img` into partitions  
+### 2️2) Unpack `super.img` into partitions  
 ```bash
 ./lpunpack super.img /super_unpacked
 ```
-✔️ You will get `system`, `vendor`, `system_a`, `system_b`, `vendor_a`, `vendor_b` images.  
-⚠️ If an error occurs (`vendor_b.img not found`), create an empty file to bypass:  
+ You will get `system`, `vendor`, `system_a`, `system_b`, `vendor_a`, `vendor_b` images.  
+ If an error occurs (`vendor_b.img not found`), create an empty file to bypass:  
 ```bash
 mkdir super_unpacked; cd super_unpacked; touch vendor_b.img
 ```
@@ -92,7 +92,7 @@ Now you have **all images extracted** from the firmware.
 
 ---
 
-## 🛠️ Extracting Device Tree, Kernel, and Other Files  
+## Extracting Device Tree, Kernel, and Other Files  
 
 When extracting **device tree blobs (DTB)**, **kernel files**, and **embedded partitions**, different methods apply based on the image format. Here’s a **step-by-step guide covering all approaches**, including the **manual `dd` method** for stubborn files.
 
@@ -100,12 +100,12 @@ When extracting **device tree blobs (DTB)**, **kernel files**, and **embedded pa
 
 ---
 
-### 📌 **Step 1: Install Required Libraries & Tools**  
+###   **Step 1: Install Required Libraries & Tools**  
 Before extracting, install essential tools:  
 ```bash
 sudo apt update && sudo apt install -y binwalk simg2img lz4 squashfs-tools mount
 ```
-✔️ **Additional Dependencies:**  
+   **Additional Dependencies:**  
 ```bash
 pip install protobuf
 ```
@@ -113,21 +113,21 @@ pip install protobuf
 
 ---
 
-### 📌 **Step 2: Identify Image Format**  
+###   **Step 2: Identify Image Format**  
 First, check the format of `.img` files:  
 ```bash
 file *.img
 ```
-✔️ If **Erofs**, **SquashFS**, **Ext4**, or another format, use the relevant method below.
+  If **Erofs**, **SquashFS**, **Ext4**, or another format, use the relevant method below.
 
 ---
 
-### 📌 **Step 3: Extracting EROFS Files**  
+###   **Step 3: Extracting EROFS Files**  
 For **EROFS-formatted partitions**, use:  
 ```bash
 ./erofsUnpackRust_x64linux system_a.img
 ```
-🚀 Files will be unpacked.
+  Files will be unpacked.
 
 Alternatively, **mount EROFS manually** on Linux:  
 ```bash
@@ -138,27 +138,27 @@ Now browse the extracted files inside `mount_point/`.
 
 ---
 
-### 📌 **Step 4: Extracting Generic Files Using Binwalk**  
+###   **Step 4: Extracting Generic Files Using Binwalk**  
 If the image contains embedded files (such as kernel or DTB blobs), use **Binwalk** for deep extraction:  
 ```bash
 binwalk -Me name.img
 ```
-🚀 Extracted data is stored inside auto-generated folders.  
+   Extracted data is stored inside auto-generated folders.  
 
-✔️ If you only need a **content list**, without extracting:  
+   If you only need a **content list**, without extracting:  
 ```bash
 binwalk -Me -r name.img
 ```
 
-📌 **Additional Extraction with Binwalk:**  
+  **Additional Extraction with Binwalk:**  
 If Binwalk does not properly extract the data, use **`dd`** to manually carve out sections based on offsets as mentioned in Step 8.
 
 ---
 
-### 📌 **Step 5: Extracting Kernel & Device Tree (DTB)**  
+###    **Step 5: Extracting Kernel & Device Tree (DTB)**  
 Some devices store **kernel and DTB files** inside `boot.img`, `vendor_boot.img`, or `dtbo.img`.  
 
-#### ✔️ **Using `split_bootimg.pl`**
+####    **Using `split_bootimg.pl`**
 Install the tool:
 ```bash
 git clone https://github.com/xblax/bootimg-tools.git
@@ -171,12 +171,12 @@ Extract boot image components:
 ```bash
 ./split_bootimg.pl boot.img
 ```
-🚀 Generates extracted files such as:  
+   Generates extracted files such as:  
 - `kernel`  
 - `ramdisk`  
 - `dtb`  
 
-📌 **If DTB is missing, extract manually using `dd`:**  
+   **If DTB is missing, extract manually using `dd`:**  
 ```bash
 dd if=boot.img of=dtb.img bs=1 skip=<offset>
 ```
@@ -184,80 +184,80 @@ _(Replace `<offset>` with actual DTB location found using Binwalk.)_
 
 ---
 
-### 📌 **Step 6: Extracting Android Boot Image Components**  
+###    **Step 6: Extracting Android Boot Image Components**  
 For extracting boot partitions (`boot.img`, `vendor_boot.img`, etc.), use **Android Boot Image Editor**:
 
-✔️ Clone and install:  
+   Clone and install:  
 ```bash
 git clone https://github.com/cfig/Android_boot_image_editor.git  
 cd Android_boot_image_editor  
 chmod +x gradlew  
 ```
-🚀 **Unpack boot image:**  
+   **Unpack boot image:**  
 ```bash
 ./gradlew unpack
 ```
-✔️ Extracted files appear in `image-unpack-repack/build/`.  
-📌 **After extracting each `.img`, clear the build folder** to avoid conflicts.
+   Extracted files appear in `image-unpack-repack/build/`.  
+   **After extracting each `.img`, clear the build folder** to avoid conflicts.
 
 ---
 
-### 📌 **Step 7: Extracting Vendor Blobs**  
+###  **Step 7: Extracting Vendor Blobs**  
 For extracting vendor binary blobs:  
 ```bash
 ./extract-proprietary-files.sh
 ```
-🚀 This copies vendor blobs into the correct AOSP directory.
+   This copies vendor blobs into the correct AOSP directory. (This wont for every source)
 
-✔️ **Manually extracting `vendor.img`:**  
+ **Manually extracting `vendor.img`:**  
 ```bash
 simg2img vendor.img vendor.raw.img  
 mkdir vendor_mount  
 sudo mount -o loop vendor.raw.img vendor_mount/
 ```
-✔️ You can now browse vendor files inside `vendor_mount/`.
+   You can now browse vendor files inside `vendor_mount/`.
 
 ---
 
-### 📌 **Step 8: Manual Extraction Using `dd` (If Nothing Else Works)**  
+###    **Step 8: Manual Extraction Using `dd` (If Nothing Else Works)**  
 When **other methods fail**, manually extract files using `dd`.  
-1️⃣ **Find offsets using Binwalk:**  
+1️) **Find offsets using Binwalk:**  
 ```bash
 binwalk -E name.img
 ```
-✔️ This displays embedded file locations.
+   This displays embedded file locations.
 
-2️⃣ **Extract data manually:**  
+2️) **Extract data manually:**  
 ```bash
 dd if=name.img of=extracted_file bs=1 skip=<offset> count=<size>
 ```
 - **`skip=<offset>`** = Starting byte (found using Binwalk).  
 - **`count=<size>`** = Size of the file (estimate based on previous extractions).  
 
-🚀 This method **works when automated extractors fail**!
+   This method **works when automated extractors fail**!
 
 ---
 
-## 🎯 **Final Notes**  
-✔️ Always **check the image format first**.  
-✔️ Use the **appropriate extraction tool** (`Binwalk`, `simg2img`, `dd`, etc.).  
-✔️ If extraction **fails**, **try a combination of multiple methods**.  
-✔️ **Clear build folders** after unpacking to keep things organized.  
+##  **Final Notes**  
+ Always **check the image format first**.  
+ Use the **appropriate extraction tool** (`Binwalk`, `simg2img`, `dd`, etc.).  
+ If extraction **fails**, **try a combination of multiple methods**.  
+ **Clear build folders** after unpacking to keep things organized.  
 
 
 ---
 
 ## 📜 License  
-📌 This project is a **collection of open-source tools**.  
+ This project is a **collection of open-source tools**.  
 Each tool contains its **own respective license file**.
 
 
 ---
 
 ## 🏆 Credits  
-🙏 **Thanks to the amazing developers** who created these essential tools!  
+ **Thanks to the amazing developers** who created these essential tools!  
 
-| 🔹 **Tool** | 🏷️ **Developer** | 🔗 **Repository** |
+|  **Tool** |  **Developer** |  **Repository** |
 |------------|-----------------|------------------|
 | **Binwalk** | @ReFirmLabs | [🔗 GitHub Repo](https://github.com/ReFirmLabs/binwalk) |
 | **DTC (Device Tree Compiler)** | @dgibson | [🔗 GitHub Repo](https://github.com/dgibson/dtc) |
