@@ -27,12 +27,9 @@
 [🔗 Android Dev Tools Release](https://github.com/PROPGSP/Android-Tools/releases/tag/release)  
 
 
----
-
  
 As a beginner in **Android ROM development and customization**, I have collected some tools to that are required to extract the required blobs to build device tree from an ota update package.
 
----
 
 ##  Important Advice  
    **Strictly use Linux** – It's essential for ROM development.  
