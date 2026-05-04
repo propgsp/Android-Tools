@@ -6,7 +6,8 @@
 
 # Android  Tools
 
-
+(Working on an all in one combined script.
+Soon repo will be pushed and made public)
 
 **A collection of powerful tools designed to kickstart your Android ROM development and customization.**  
 
